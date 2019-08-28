@@ -1,4 +1,4 @@
-if (typeof(tests) != "object") {
+if (typeof (tests) != "object") {
     tests = [];
 }
 
@@ -23,9 +23,9 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          query: {_id: {"#RAND_INT_PLUS_THREAD": [0, 100]}},
-          update: [{$set: {x: {$add: ["$x", 1]}}}],
+            op: "update",
+            query: {_id: {"#RAND_INT_PLUS_THREAD": [0, 100]}},
+            update: [{$set: {x: {$add: ["$x", 1]}}}],
         },
     ],
 });
@@ -44,10 +44,10 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          upsert: true,
-          query: {_id: {"#RAND_INT_PLUS_THREAD": [0, 100]}},
-          update: [{$set: {x: {$add: ["$x", 1]}}}],
+            op: "update",
+            upsert: true,
+            query: {_id: {"#RAND_INT_PLUS_THREAD": [0, 100]}},
+            update: [{$set: {x: {$add: ["$x", 1]}}}],
         },
     ],
 });
@@ -89,23 +89,23 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          query: {
-              _id: {
-                  "#SEQ_INT": {seq_id: 0, start: 0, step: 1, mod: 100},
-              },
-          },
-          update: [
-              {
-                $set: {
-                    kbgcslcybg: ["$kbgcslcybg", 1],
-                    vjhgznppgw: ["$vjhgznppgw", 1],
-                    jzaathnsra: ["$jzaathnsra", 1],
-                    miohmkbzvv: ["$miohmkbzvv", 1],
-                    elcgijivrt: ["$elcgijivrt", 1],
+            op: "update",
+            query: {
+                _id: {
+                    "#SEQ_INT": {seq_id: 0, start: 0, step: 1, mod: 100},
                 },
-              },
-          ],
+            },
+            update: [
+                {
+                    $set: {
+                        kbgcslcybg: ["$kbgcslcybg", 1],
+                        vjhgznppgw: ["$vjhgznppgw", 1],
+                        jzaathnsra: ["$jzaathnsra", 1],
+                        miohmkbzvv: ["$miohmkbzvv", 1],
+                        elcgijivrt: ["$elcgijivrt", 1],
+                    },
+                },
+            ],
         },
     ],
 });
@@ -133,9 +133,9 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          query: {_id: {"#RAND_INT_PLUS_THREAD": [0, 100]}},
-          update: [{$set: {x: {"#RAND_INT": [0, 1000]}, y: {"#RAND_STRING": [1024]}}}]
+            op: "update",
+            query: {_id: {"#RAND_INT_PLUS_THREAD": [0, 100]}},
+            update: [{$set: {x: {"#RAND_INT": [0, 1000]}, y: {"#RAND_STRING": [1024]}}}]
         },
     ]
 });
@@ -229,10 +229,10 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          multi: true,
-          query: {_id: {$gt: 1590, $lt: 1610}},
-          update: [{$set: {x: {$add: ["$x", 1]}}}]
+            op: "update",
+            multi: true,
+            query: {_id: {$gt: 1590, $lt: 1610}},
+            update: [{$set: {x: {$add: ["$x", 1]}}}]
         },
     ]
 });
@@ -261,15 +261,15 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          multi: true,
-          query: {},
-          update: [{
-              $set: {
-                  tags: {$concatArrays: ["$tags", ["new string"]]},
-                  tagsSize: {$add: ["$tagsSize", 1]}
-              }
-          }]
+            op: "update",
+            multi: true,
+            query: {},
+            update: [{
+                $set: {
+                    tags: {$concatArrays: ["$tags", ["new string"]]},
+                    tagsSize: {$add: ["$tagsSize", 1]}
+                }
+            }]
         },
     ]
 });
@@ -348,22 +348,22 @@ tests.push({
     },
     ops: [
         {
-          op: "update",
-          multi: true,
-          query: {},
-          update: [
-              {
-                $set: {
-                    date: {
-                        $cond: {
-                            if: {$gt: ["$date", new Date("2500-1-1")]},
-                            then: new Date("2500-1-2"),
-                            else: {$add: ["$date", 1000 * 60 * 60 * 24]}
-                        },
+            op: "update",
+            multi: true,
+            query: {},
+            update: [
+                {
+                    $set: {
+                        date: {
+                            $cond: {
+                                if: {$gt: ["$date", new Date("2500-1-1")]},
+                                then: new Date("2500-1-2"),
+                                else: {$add: ["$date", 1000 * 60 * 60 * 24]}
+                            },
+                        }
                     }
-                }
-              },
-          ]
+                },
+            ]
         },
     ]
 });
@@ -439,7 +439,7 @@ tests.push({
     pre: function setUpFindAndModifySortedUpdateWithPipeline(collection) {
         collection.drop();
         Random.setRandomSeed(22002);
-        var nDocs = 5000;
+        var nDocs = 500000;
         var bulk = collection.initializeUnorderedBulkOp();
         for (var i = 0; i < nDocs; i++) {
             bulk.insert({count: 0, rand: Random.rand()});
@@ -469,7 +469,7 @@ tests.push({
     pre: function setUpFindAndModifySortedUpdate(collection) {
         collection.drop();
         Random.setRandomSeed(22002);
-        var nDocs = 5000;
+        var nDocs = 500000;
         var bulk = collection.initializeUnorderedBulkOp();
         for (var i = 0; i < nDocs; i++) {
             bulk.insert({count: 0, rand: Random.rand()});
@@ -561,15 +561,15 @@ tests.push({
     },
     ops: [
         {
-          op: "command",
-          ns: "#B_DB",
-          command: {
-              findAndModify: "#B_COLL",
-              query: {_id: {"#RAND_INT": [0, 5000]}},
-              update: addExtraCreditPipeline(),
-              new: true,
-              fields: {overall_grade: 1}
-          }
+            op: "command",
+            ns: "#B_DB",
+            command: {
+                findAndModify: "#B_COLL",
+                query: {_id: {"#RAND_INT": [0, 5000]}},
+                update: addExtraCreditPipeline(),
+                new: true,
+                fields: {overall_grade: 1}
+            }
         },
     ]
 });
@@ -606,16 +606,16 @@ tests.push({
     },
     ops: [
         {
-          op: "command",
-          ns: "#B_DB",
-          command: {
-              findAndModify: "#B_COLL",
-              query: {},
-              update: addExtraCreditPipeline(),
-              new: true,
-              fields: {overall_grade: 1},
-              sort: {overall_grade: -1}
-          }
+            op: "command",
+            ns: "#B_DB",
+            command: {
+                findAndModify: "#B_COLL",
+                query: {},
+                update: addExtraCreditPipeline(),
+                new: true,
+                fields: {overall_grade: 1},
+                sort: {overall_grade: -1}
+            }
         },
     ]
 });
